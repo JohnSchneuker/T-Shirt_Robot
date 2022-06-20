@@ -52,6 +52,19 @@ public class DriveTrain extends SubsystemBase {
     backRightMotor.set(ControlMode.PercentOutput, -forward, DemandType.ArbitraryFeedForward, turn);
   }
 
+  double Deadband(double value) { 
+		/* Upper deadband */
+		if (value >= +0.05) 
+			return value;
+		
+		/* Lower deadband */
+		if (value <= -0.05)
+			return value;
+		
+		/* Outside deadband */
+		return 0;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
