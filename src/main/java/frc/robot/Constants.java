@@ -19,14 +19,28 @@ public final class Constants {
         /* Pitch Motor Ports */
         public static final int LEFT_PMOTOR_PORT = 7;
         public static final int RIGHT_PMOTOR_PORT = 8;
+        /* Pitch Motor Encoders */
+        public static final int RIGHT_PENCODER_PORT_A        = 0;     // port for the A channel of right encoder
+        public static final int RIGHT_PENCODER_PORT_B        = 1;     // port for the B channel of right encoder
+        public static final boolean RIGHT_PENCODER_REVERSE   = true;  // is the right encoder reversed?
+
+        public static final int LEFT_PENCODER_PORT_A         = 2;     // port for the A channel of left encoder
+        public static final int LEFT_PENCODER_PORT_B         = 3;     // port for the B channel of left encoder
+        public static final boolean LEFT_PENCODER_REVERSE    = false; // is the left encoder reversed?
     }
 
-    public static final class PneumaticConstants{
-        /* Solonoid Ports */
+    public static final class PneumaticsConstants{
+        /*Output Solonoid Ports */
         public static final int TL_SOLONOID_PORT = 7;
         public static final int TR_SOLONOID_PORT = 7;
         public static final int BL_SOLONOID_PORT = 7;
         public static final int BR_SOLONOID_PORT = 7;
+
+        /*Input Solonoid Ports */
+        public static final int TLi_SOLONOID_PORT = 7;
+        public static final int TRi_SOLONOID_PORT = 7;
+        public static final int BLi_SOLONOID_PORT = 7;
+        public static final int BRi_SOLONOID_PORT = 7;
     }
 
     public static final class OIConstants{
