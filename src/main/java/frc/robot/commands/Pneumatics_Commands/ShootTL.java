@@ -5,11 +5,16 @@
 package frc.robot.commands.Pneumatics_Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Pneumatics;
 
 public class ShootTL extends CommandBase {
+  private final Pneumatics m_Pneumatics;
+
   /** Creates a new ShootTL. */
-  public ShootTL() {
+  public ShootTL(Pneumatics pneumatics) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_Pneumatics = pneumatics;
+    addRequirements(m_Pneumatics);
   }
 
   // Called when the command is initially scheduled.
@@ -18,11 +23,15 @@ public class ShootTL extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+  m_Pneumatics.turnOnTL();
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  m_Pneumatics.turnOffTL();
+  }
 
   // Returns true when the command should end.
   @Override

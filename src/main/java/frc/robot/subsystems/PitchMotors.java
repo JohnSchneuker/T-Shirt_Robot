@@ -28,7 +28,7 @@ public class PitchMotors extends SubsystemBase {
 
   public void setPitchMotors(double speed){
     LEFT_PMOTOR.set(ControlMode.PercentOutput, speed);
-    RIGHT_PMOTOR.set(ControlMode.PercentOutput, speed);
+    RIGHT_PMOTOR.set(ControlMode.PercentOutput, -speed);
   }
 
   @Override

@@ -47,8 +47,25 @@ public class RobotContainer {
     private void configureButtonBindings(){
 
         // Shooter Buttons
+        new JoystickButton(operator, OIConstants.TR_BUTTON).whenHeld(new ShootTR(_Pneumatics));
+
+        new JoystickButton(operator, OIConstants.TL_BUTTON).whenHeld(new ShootTL(_Pneumatics));
+        
+        new JoystickButton(operator, OIConstants.BR_BUTTON).whenHeld(new ShootBR(_Pneumatics));
+
+        new JoystickButton(operator, OIConstants.BL_BUTTON).whenHeld(new ShootBL(_Pneumatics));
+
+        new JoystickButton(operator, OIConstants.TRi_BUTTON).whenHeld(new FillTRi(_Pneumatics));
+
+        new JoystickButton(operator, OIConstants.TLi_BUTTON).whenHeld(new FillTLi(_Pneumatics));
+
+        new JoystickButton(operator, OIConstants.BRi_BUTTON).whenHeld(new FillBRi(_Pneumatics));
+
+        new JoystickButton(operator, OIConstants.BLi_BUTTON).whenHeld(new FillBLi(_Pneumatics));
 
         // Aim Buttons
-    
+        new JoystickButton(operator, OIConstants.UP_BUTTON).whenHeld(new ShooterUp(_Rollers));
+
+        new JoystickButton(operator, OIConstants.DOWN_BUTTON).whenHeld(new ShooterDown(_Rollers));
     }
 }

@@ -7,11 +7,11 @@ package frc.robot.commands.Pneumatics_Commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Pneumatics;
 
-public class ShootTR extends CommandBase {
+public class CloseBL extends CommandBase {
   private final Pneumatics m_Pneumatics;
 
-  /** Creates a new ShootTR. */
-  public ShootTR(Pneumatics pneumatics) {
+  /** Creates a new CloseBL. */
+  public CloseBL(Pneumatics pneumatics) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_Pneumatics = pneumatics;
     addRequirements(m_Pneumatics);
@@ -24,13 +24,13 @@ public class ShootTR extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  m_Pneumatics.turnOnTR();
+  m_Pneumatics.turnOffBL();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-  m_Pneumatics.turnOffTR();
+  m_Pneumatics.turnOffBL();
   }
 
   // Returns true when the command should end.

@@ -49,14 +49,18 @@ public final class Constants {
         public static final int OPERATOR  = 1; // operator controller port (usb) on laptop (changeable w/ oi in driver station)
 
         /* Controller Buttons */
-        public static final int INTAKE_BUTTON = 0;
-        public static final int SHOOT_BUTTON = 3;
-        public static final int WHEEL_BUTTON = 1;
         public static final int UP_BUTTON = 4;
         public static final int DOWN_BUTTON = 5;
-        public static final int JERRY_BUTTON = 6;
-        public static final int TOM_BUTTON = 7;
+
+        public static final int TR_BUTTON = 4;
+        public static final int TL_BUTTON = 4;
+        public static final int BR_BUTTON = 4;
+        public static final int BL_BUTTON = 4;
         
+        public static final int TRi_BUTTON = 4;
+        public static final int TLi_BUTTON = 4;
+        public static final int BRi_BUTTON = 4;
+        public static final int BLi_BUTTON = 4;
     }
 
 }

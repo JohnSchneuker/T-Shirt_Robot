@@ -2,19 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Pneumatics_Commands;
+package frc.robot.commands.Pitch_Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.PitchMotors;
 
-public class ShootTR extends CommandBase {
-  private final Pneumatics m_Pneumatics;
+public class StopMotors extends CommandBase {
+  private final PitchMotors m_PitchMotors;
 
-  /** Creates a new ShootTR. */
-  public ShootTR(Pneumatics pneumatics) {
+  /** Creates a new StopMotors. */
+  public StopMotors(PitchMotors PitchMotor) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_Pneumatics = pneumatics;
-    addRequirements(m_Pneumatics);
+    m_PitchMotors = PitchMotor;
+    addRequirements(m_PitchMotors);
   }
 
   // Called when the command is initially scheduled.
@@ -24,13 +24,13 @@ public class ShootTR extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  m_Pneumatics.turnOnTR();
+    m_PitchMotors.setPitchMotors(0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-  m_Pneumatics.turnOffTR();
+    m_PitchMotors.setPitchMotors(0);
   }
 
   // Returns true when the command should end.
