@@ -7,32 +7,35 @@ package frc.robot.commands.Pneumatics_Commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Pneumatics;
 
-
-public class ShootBR extends CommandBase {
+public class OutputSolenoids extends CommandBase {
   private final Pneumatics m_Pneumatics;
+  private final String solenoid;
+  private final Boolean fire;
 
-  /** Creates a new ShootBR. */
-  public ShootBR(Pneumatics pneumatics) {
+  /** Creates a new OutputSolenoids. */
+  public OutputSolenoids(Pneumatics pneumatics, String solenoids, boolean shoot) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_Pneumatics = pneumatics;
+    solenoid = solenoids;
+    fire = shoot;
     addRequirements(m_Pneumatics);
-
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  m_Pneumatics.turnOnBR();
+    m_Pneumatics.setOutputSolenoid(solenoid, fire);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-  m_Pneumatics.turnOffBR();
+  m_Pneumatics.turnOffTR();
   }
 
   // Returns true when the command should end.

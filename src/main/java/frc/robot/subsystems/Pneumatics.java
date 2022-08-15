@@ -115,6 +115,42 @@ public class Pneumatics extends SubsystemBase {
   public void turnOnTRi(){
   TRi_Solenoid.set(true);
   }
+
+  public void setInputSolenoid(String solenoid, Boolean fire){
+    if (solenoid == "TRi"){
+      TRi_Solenoid.set(fire);
+    } 
+    else if (solenoid == "TLi"){
+      TLi_Solenoid.set(fire);
+    }
+    else if (solenoid == "BRi"){
+      BRi_Solenoid.set(fire);
+    }
+    else if (solenoid == "BLi"){
+      BLi_Solenoid.set(fire);
+    }
+    else {
+      System.out.println("That's not an input solenoid!");
+    }
+  }
+
+  public void setOutputSolenoid(String solenoid, Boolean fire){
+    if (solenoid == "TR"){
+      TRi_Solenoid.set(fire);
+    } 
+    else if (solenoid == "TL"){
+      TLi_Solenoid.set(fire);
+    }
+    else if (solenoid == "BR"){
+      BRi_Solenoid.set(fire);
+    }
+    else if (solenoid == "BL"){
+      BLi_Solenoid.set(fire);
+    }
+    else {
+      System.out.println("That's not an output solenoid!");
+    }
+  }
     
 
   @Override

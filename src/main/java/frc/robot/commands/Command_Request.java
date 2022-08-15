@@ -2,20 +2,15 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Pneumatics_Commands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Pneumatics;
 
+public class Command_Request extends CommandBase {
 
-public class ShootBR extends CommandBase {
-  private final Pneumatics m_Pneumatics;
-
-  /** Creates a new ShootBR. */
-  public ShootBR(Pneumatics pneumatics) {
+  /** Creates a new Command_Request. */
+  public Command_Request(boolean TR, boolean TL, boolean BL, boolean BR, float timeout) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_Pneumatics = pneumatics;
-    addRequirements(m_Pneumatics);
 
   }
 
@@ -25,15 +20,11 @@ public class ShootBR extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-  m_Pneumatics.turnOnBR();
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-  m_Pneumatics.turnOffBR();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

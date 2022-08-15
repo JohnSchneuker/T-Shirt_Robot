@@ -28,7 +28,7 @@ public class DriveTrain extends SubsystemBase {
 
   /* right motors */
   private final TalonSRX frontRightMotor = new TalonSRX(DriveConstants.RIGHT_MOTOR1_PORT);
-  private final VictorSPX middleRightMotor = new VictorSPX(DriveConstants.LEFT_MOTOR2_PORT);
+  private final VictorSPX middleRightMotor = new VictorSPX(DriveConstants.RIGHT_MOTOR2_PORT);
   private final VictorSPX backRightMotor = new VictorSPX(DriveConstants.RIGHT_MOTOR3_PORT);
 
   /* dashboard for debug values */
