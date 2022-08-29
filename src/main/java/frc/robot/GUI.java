@@ -13,8 +13,9 @@ import edu.wpi.first.networktables.LogMessage;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class GUI extends JPanel
-                            implements ActionListener, ItemListener{
-    JCheckBox topLeft0;
+    implements ActionListener, ItemListener{
+    
+        JCheckBox topLeft0;
     JCheckBox topRight0;
     JCheckBox bottomLeft0;
     JCheckBox bottomRight0;
@@ -30,10 +31,17 @@ public class GUI extends JPanel
     JCheckBox topRight3;
     JCheckBox bottomLeft3;
     JCheckBox bottomRight3;
+    
     JTextField aField0 = new JTextField();
     JTextField aField1 = new JTextField();
     JTextField aField2 = new JTextField();
     JTextField aField3 = new JTextField();
+
+    JTextField wField0 = new JTextField();
+    JTextField wField1 = new JTextField();
+    JTextField wField2 = new JTextField();
+    JTextField wField3 = new JTextField();
+    
     JButton run;
     JButton abort;
     StringBuffer choices;
@@ -63,14 +71,16 @@ public class GUI extends JPanel
     boolean BRstate3;
     boolean BLstate3;
 
-    float wait1;
-    float wait2;
-    float wait3;
-    float wait4;
+    double waitvar0;
+    double waitvar1;
+    double waitvar2;
+    double waitvar3;
 
-    //Angle0.getText()
-
-
+    double angvar0;
+    double angvar1;
+    double angvar2;
+    double angvar3;
+    
     SequentialCommandGroup command;
 
  
@@ -168,7 +178,7 @@ public class GUI extends JPanel
        
         JPanel wait0 = new JPanel(new GridLayout(1, 3));
         wait0.add(new JLabel("Wait For"));
-        wait0.add(new JTextField());
+        wait0.add(wField0);
         wait0.add(new JLabel("    Seconds"));
         JPanel angle0 = new JPanel(new GridLayout(1, 2));
         angle0.add(new JLabel("Cannon Angle:"));
@@ -181,7 +191,7 @@ public class GUI extends JPanel
         
         JPanel wait1 = new JPanel(new GridLayout(1, 3));
         wait1.add(new JLabel("Wait For"));
-        wait1.add(new JTextField());
+        wait1.add(wField1);
         wait1.add(new JLabel("    Seconds"));
         JPanel angle1 = new JPanel(new GridLayout(1, 2));
         angle1.add(new JLabel("Cannon Angle:"));
@@ -194,7 +204,7 @@ public class GUI extends JPanel
 
         JPanel wait2 = new JPanel(new GridLayout(1, 3));
         wait2.add(new JLabel("Wait For"));
-        wait2.add(new JTextField());
+        wait2.add(wField2);
         wait2.add(new JLabel("    Seconds"));
         JPanel angle2 = new JPanel(new GridLayout(1, 2));
         angle2.add(new JLabel("Cannon Angle:"));
@@ -207,7 +217,7 @@ public class GUI extends JPanel
         
         JPanel wait3 = new JPanel(new GridLayout(1, 3));
         wait3.add(new JLabel("Wait For"));
-        wait3.add(new JTextField());
+        wait3.add(wField3);
         wait3.add(new JLabel("    Seconds"));
         JPanel angle3 = new JPanel(new GridLayout(1, 2));
         angle3.add(new JLabel("Cannon Angle:"));
@@ -273,6 +283,7 @@ public class GUI extends JPanel
     /** Listens to the check boxes. */
     public void itemStateChanged(ItemEvent e) {
         //V this needs to be cloned 11 times (i think)
+        /*
         if (e.getSource() == topLeft0) {
             if (e.getStateChange() == 1) {
                 //put checkmark state here?
@@ -284,6 +295,7 @@ public class GUI extends JPanel
                 
             }
         }
+        */
         TRstate0 = topRight0.isSelected();
         TLstate0 = topLeft0.isSelected();
         BRstate0 = bottomRight0.isSelected();
@@ -308,30 +320,41 @@ public class GUI extends JPanel
     }
     public void actionPerformed(ActionEvent e) {
         if ("exc".equals(e.getActionCommand())) {
+
+            angvar0 = Double.parseDouble(aField0.getText());
+            angvar1 = Double.parseDouble(aField1.getText());
+            angvar2 = Double.parseDouble(aField2.getText());
+            angvar3 = Double.parseDouble(aField3.getText());
+
+            waitvar0 = Double.parseDouble(wField0.getText());
+            waitvar1 = Double.parseDouble(wField1.getText());
+            waitvar2 = Double.parseDouble(wField2.getText());
+            waitvar3 = Double.parseDouble(wField3.getText());
+
             command = new SequentialCommandGroup(
-                new TurnShooterToAngle(Double.parseDouble(aField0.getText()), _PitchMotors),
+                new TurnShooterToAngle(angvar0, _PitchMotors),
                 new OutputSolenoids(_Pneumatics, "TR", TRstate0),
                 new OutputSolenoids(_Pneumatics, "TL", TLstate0),
                 new OutputSolenoids(_Pneumatics, "BR", BRstate0),
-                new OutputSolenoids(_Pneumatics, "BL", BLstate0).withTimeout(wait1),
+                new OutputSolenoids(_Pneumatics, "BL", BLstate0).withTimeout(waitvar0),
                 
-                new TurnShooterToAngle(Double.parseDouble(aField1.getText()), _PitchMotors),
+                new TurnShooterToAngle(angvar1, _PitchMotors),
                 new OutputSolenoids(_Pneumatics, "TR", TRstate1),
                 new OutputSolenoids(_Pneumatics, "TL", TLstate1),
                 new OutputSolenoids(_Pneumatics, "BR", BRstate1),
-                new OutputSolenoids(_Pneumatics, "BL", BLstate1).withTimeout(wait2),
+                new OutputSolenoids(_Pneumatics, "BL", BLstate1).withTimeout(waitvar1),
                 
-                new TurnShooterToAngle(Double.parseDouble(aField2.getText()), _PitchMotors),
+                new TurnShooterToAngle(angvar2, _PitchMotors),
                 new OutputSolenoids(_Pneumatics, "TR", TRstate2),
                 new OutputSolenoids(_Pneumatics, "TL", TLstate2),
                 new OutputSolenoids(_Pneumatics, "BR", BRstate2),
-                new OutputSolenoids(_Pneumatics, "BL", BLstate2).withTimeout(wait3),
+                new OutputSolenoids(_Pneumatics, "BL", BLstate2).withTimeout(waitvar2),
                 
-                new TurnShooterToAngle(Double.parseDouble(aField3.getText()), _PitchMotors),
+                new TurnShooterToAngle(angvar3, _PitchMotors),
                 new OutputSolenoids(_Pneumatics, "TR", TRstate3),
                 new OutputSolenoids(_Pneumatics, "TL", TLstate3),
                 new OutputSolenoids(_Pneumatics, "BR", BRstate3),
-                new OutputSolenoids(_Pneumatics, "BL", BLstate3).withTimeout(wait4)
+                new OutputSolenoids(_Pneumatics, "BL", BLstate3).withTimeout(waitvar3)
             );
 
             if (command != null) {
@@ -339,10 +362,8 @@ public class GUI extends JPanel
                 }
             
             CommandScheduler.getInstance().run();
-            //put run here?
         }
         if ("quit".equals(e.getActionCommand())){
-            //put abort here?
             CommandScheduler.getInstance().cancelAll();
         }
     }

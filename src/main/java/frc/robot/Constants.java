@@ -29,7 +29,7 @@ public final class Constants {
         public static final boolean LEFT_PENCODER_REVERSE    = false; // is the left encoder reversed?
     
         public static final int gearRatio = 1080;
-        public static final int ticks_per_rotation = 1080;
+        public static final int ticks_per_rotation = 5;
     }
 
     public static final class PneumaticsConstants{
