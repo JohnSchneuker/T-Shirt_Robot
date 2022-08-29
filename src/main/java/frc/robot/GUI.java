@@ -80,7 +80,7 @@ public class GUI extends JPanel
     double angvar1;
     double angvar2;
     double angvar3;
-    
+
     SequentialCommandGroup command;
 
  
@@ -175,6 +175,7 @@ public class GUI extends JPanel
         bottomRight3.addItemListener(this);
         run.addActionListener(this);
         abort.addActionListener(this);
+        aField0.addActionListener(this);
        
         JPanel wait0 = new JPanel(new GridLayout(1, 3));
         wait0.add(new JLabel("Wait For"));
