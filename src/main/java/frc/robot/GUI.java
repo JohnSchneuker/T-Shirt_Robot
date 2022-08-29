@@ -10,6 +10,7 @@ import frc.robot.commands.Pitch_Commands.*;
 import frc.robot.subsystems.PitchMotors;
 import frc.robot.subsystems.Pneumatics;
 import edu.wpi.first.networktables.LogMessage;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 public class GUI extends JPanel
                             implements ActionListener, ItemListener{
@@ -42,6 +43,11 @@ public class GUI extends JPanel
     private Pneumatics _Pneumatics = new Pneumatics();
     private PitchMotors _PitchMotors = new PitchMotors();
     
+    boolean TRstate0;
+    boolean TLstate0;
+    boolean BRstate0;
+    boolean BLstate0;
+
     boolean TRstate1;
     boolean TLstate1;
     boolean BRstate1;
@@ -56,11 +62,6 @@ public class GUI extends JPanel
     boolean TLstate3;
     boolean BRstate3;
     boolean BLstate3;
-
-    boolean TRstate4;
-    boolean TLstate4;
-    boolean BRstate4;
-    boolean BLstate4;
 
     float wait1;
     float wait2;
@@ -275,7 +276,7 @@ public class GUI extends JPanel
         if (e.getSource() == topLeft0) {
             if (e.getStateChange() == 1) {
                 //put checkmark state here?
-                TLstate1 = true;
+                TLstate0 = true;
             }
             else {
                 //put data here?
@@ -283,39 +284,66 @@ public class GUI extends JPanel
                 
             }
         }
+        TRstate0 = topRight0.isSelected();
+        TLstate0 = topLeft0.isSelected();
+        BRstate0 = bottomRight0.isSelected();
+        BLstate0 = bottomLeft0.isSelected();
+
+        TRstate1 = topRight1.isSelected();
+        TLstate1 = topLeft1.isSelected();
+        BRstate1 = bottomRight1.isSelected();
+        BLstate1 = bottomLeft1.isSelected();
+
+        TRstate2 = topRight2.isSelected();
+        TLstate2 = topLeft2.isSelected();
+        BRstate2 = bottomRight2.isSelected();
+        BLstate2 = bottomLeft2.isSelected();
+
+        TRstate3 = topRight3.isSelected();
+        TLstate3 = topLeft3.isSelected();
+        BRstate3 = bottomRight3.isSelected();
+        BLstate3 = bottomLeft3.isSelected();
+
         //^ this needs to be cloned 11 times (i think)
     }
     public void actionPerformed(ActionEvent e) {
         if ("exc".equals(e.getActionCommand())) {
             command = new SequentialCommandGroup(
-                new TurnShooterToAngle(),
+                new TurnShooterToAngle(Double.parseDouble(aField0.getText()), _PitchMotors),
+                new OutputSolenoids(_Pneumatics, "TR", TRstate0),
+                new OutputSolenoids(_Pneumatics, "TL", TLstate0),
+                new OutputSolenoids(_Pneumatics, "BR", BRstate0),
+                new OutputSolenoids(_Pneumatics, "BL", BLstate0).withTimeout(wait1),
+                
+                new TurnShooterToAngle(Double.parseDouble(aField1.getText()), _PitchMotors),
                 new OutputSolenoids(_Pneumatics, "TR", TRstate1),
                 new OutputSolenoids(_Pneumatics, "TL", TLstate1),
                 new OutputSolenoids(_Pneumatics, "BR", BRstate1),
-                new OutputSolenoids(_Pneumatics, "BL", BLstate1).withTimeout(wait1),
+                new OutputSolenoids(_Pneumatics, "BL", BLstate1).withTimeout(wait2),
                 
-                new TurnShooterToAngle(),
+                new TurnShooterToAngle(Double.parseDouble(aField2.getText()), _PitchMotors),
                 new OutputSolenoids(_Pneumatics, "TR", TRstate2),
                 new OutputSolenoids(_Pneumatics, "TL", TLstate2),
                 new OutputSolenoids(_Pneumatics, "BR", BRstate2),
-                new OutputSolenoids(_Pneumatics, "BL", BLstate2).withTimeout(wait2),
+                new OutputSolenoids(_Pneumatics, "BL", BLstate2).withTimeout(wait3),
                 
-                new TurnShooterToAngle(),
+                new TurnShooterToAngle(Double.parseDouble(aField3.getText()), _PitchMotors),
                 new OutputSolenoids(_Pneumatics, "TR", TRstate3),
                 new OutputSolenoids(_Pneumatics, "TL", TLstate3),
                 new OutputSolenoids(_Pneumatics, "BR", BRstate3),
-                new OutputSolenoids(_Pneumatics, "BL", BLstate3).withTimeout(wait3),
-                
-                new TurnShooterToAngle(),
-                new OutputSolenoids(_Pneumatics, "TR", TRstate4),
-                new OutputSolenoids(_Pneumatics, "TL", TLstate4),
-                new OutputSolenoids(_Pneumatics, "BR", BRstate4),
-                new OutputSolenoids(_Pneumatics, "BL", BLstate4).withTimeout(wait4))
-            )
+                new OutputSolenoids(_Pneumatics, "BL", BLstate3).withTimeout(wait4)
+            );
+
+            if (command != null) {
+                command.schedule();
+                }
+            
+            CommandScheduler.getInstance().run();
             //put run here?
         }
         if ("quit".equals(e.getActionCommand())){
             //put abort here?
+            CommandScheduler.getInstance().cancelAll();
         }
     }
     private static void createAndShowGUI() {

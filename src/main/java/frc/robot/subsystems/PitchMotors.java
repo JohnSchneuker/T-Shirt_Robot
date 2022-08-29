@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -29,6 +28,16 @@ public class PitchMotors extends SubsystemBase {
   public void setPitchMotors(double speed){
     LEFT_PMOTOR.set(ControlMode.PercentOutput, speed);
     RIGHT_PMOTOR.set(ControlMode.PercentOutput, -speed);
+  }
+
+  public double getLeftAngle(){
+    langle = LEFT_PENCODER.getRaw()*PitchMotorConstants.gearRatio*360/PitchMotorConstants.ticks_per_rotation;
+    return langle;
+  }
+
+  public double getRightAngle(){
+    rangle = RIGHT_PENCODER.getRaw()*PitchMotorConstants.gearRatio*360/PitchMotorConstants.ticks_per_rotation;
+    return rangle;
   }
 
   @Override

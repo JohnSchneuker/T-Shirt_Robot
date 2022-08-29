@@ -27,6 +27,9 @@ public final class Constants {
         public static final int LEFT_PENCODER_PORT_A         = 2;     // port for the A channel of left encoder
         public static final int LEFT_PENCODER_PORT_B         = 3;     // port for the B channel of left encoder
         public static final boolean LEFT_PENCODER_REVERSE    = false; // is the left encoder reversed?
+    
+        public static final int gearRatio = 1080;
+        public static final int ticks_per_rotation = 1080;
     }
 
     public static final class PneumaticsConstants{
